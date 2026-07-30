@@ -6,3 +6,7 @@ BUILD-CONTRACT.md
 VOICE-BRIEF.md
 copy.md
 mockups/
+
+# Build-only templates for og-image.jpg / favicon set
+_og.html
+_icon.html
