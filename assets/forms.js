@@ -31,7 +31,7 @@
     modal.hidden = true;
     modal.innerHTML =
       '<div class="modal__scrim" data-close></div>' +
-      '<div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">' +
+      '<div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">' +
         '<button class="modal__close" type="button" data-close aria-label="Close">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
         '</button>' +
@@ -82,7 +82,9 @@
     lastFocus = document.activeElement;
     modal.hidden = false;
     document.body.classList.add('modal-open');
-    panel.querySelector('.btn').focus();
+    // focus the panel, not the button: focusing the button paints Chrome's
+    // default blue ring the instant the dialog opens, which is off-palette.
+    panel.focus();
   }
 
   function close() {
