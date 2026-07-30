@@ -1,0 +1,1387 @@
+/* ============================================================
+   THE SALON BERLIN — design system
+   Built from brand-handbook.html v3 (30 July 2026)
+   Colour area budget: Cream 52 · Grey 20 · Cream Light 10 · Wine 16
+   ============================================================ */
+
+@import url('fonts.css');
+
+/* ---------- 1. Tokens ---------- */
+:root{
+  /* surfaces — the only colours that carry large areas.
+     Grey is retired: cold grey next to warm cream read as a printing
+     error. The light/dark rhythm now comes from cream vs wine.        */
+  --cream:       #FAF6EE;   /* PRIMARY surface — light warm paper      */
+  --cream-light: #FFFCF6;   /* raised cards and panels on cream        */
+  --cream-deep:  #EDE4D6;   /* alternating warm band + Moderation page */
+  --grey:        var(--cream-deep);   /* legacy alias, grey is retired */
+  /* text */
+  --ink:  #1A1613;
+  --ash:  #5F574E;
+  /* accent — small areas only */
+  --wine:      #6E2733;
+  --wine-deep: #4A1922;
+  --footer:    #1A1613;   /* Ink — the brand's black, per Raoul 2026-07-30 */
+
+  --hair:       rgba(95,87,78,.28);   /* hairline on cream */
+  --hair-grey:  rgba(26,22,19,.20);   /* hairline on grey  */
+
+  /* WhatsApp platform green — the one green on the site. It is a
+     platform mark, not a brand colour, and is used only on WhatsApp
+     affordances. The handbook's no-green rule still holds elsewhere. */
+  --wa:      #25D366;
+  --wa-ink:  #128C4A;   /* darkened for text/borders on light cream    */
+
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+
+  --container: 1380px;
+  --gutter:    clamp(24px, 6vw, 110px);
+
+  --sp-section:   clamp(72px, 9vw, 150px);
+  --sp-section-s: clamp(52px, 6vw, 96px);
+
+  /* Fraunces axis presets */
+  --wonk-off: 'SOFT' 20, 'WONK' 0, 'opsz' 60;
+  --wonk-on:  'SOFT' 30, 'WONK' 1, 'opsz' 72;
+}
+
+/* ---------- 2. Reset ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; overflow-x:hidden; }
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img,video{ display:block; max-width:100%; }
+a{ color:var(--wine); }
+h1,h2,h3,h4,p,ul,ol,figure{ margin:0; }
+ul{ padding:0; list-style:none; }
+
+/* ---------- 3. Layout ---------- */
+.wrap{
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.section{ padding-block:var(--sp-section); }
+.section--tight{ padding-block:var(--sp-section-s); }
+.surface-cream{ background:var(--cream); }
+.surface-grey{ background:var(--cream-deep); }   /* retired name, warm band */
+.surface-light{ background:var(--cream-light); }
+
+.grid{ display:grid; gap:clamp(28px,3.4vw,56px); }
+.grid--feature{ grid-template-columns:minmax(240px,340px) 1fr; align-items:start; }
+.grid--3{ grid-template-columns:repeat(3,1fr); }
+.grid--2{ grid-template-columns:repeat(2,1fr); }
+.grid--split{ grid-template-columns:minmax(240px,360px) 1fr; align-items:start; }
+
+/* ---------- 4. Typography ---------- */
+.display{
+  font-family:var(--display);
+  font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  color:var(--wine);
+  letter-spacing:-.005em;
+}
+h1.display,.h1{
+  font-size:clamp(40px,5.1vw,76px);
+  line-height:1.10;
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  color:var(--wine); letter-spacing:-.008em;
+}
+h2.display,.h2{
+  font-size:clamp(28px,2.9vw,44px);
+  line-height:1.12;
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  letter-spacing:-.005em;
+}
+h3.display,.h3{
+  font-size:clamp(22px,1.7vw,26px);
+  line-height:1.22;
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+}
+.ink{ color:var(--ink); }
+.wine{ color:var(--wine); }
+.ash{ color:var(--ash); }
+
+.lead{
+  font-size:clamp(18px,1.35vw,20px);
+  font-weight:300;
+  line-height:1.55;
+  color:var(--ash);
+  max-width:58ch;
+}
+p{ max-width:68ch; }
+.body-p + .body-p{ margin-top:1.15em; }
+.small{ font-size:14px; line-height:1.5; }
+
+/* meta / mono */
+.meta{
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  line-height:1.4;
+  color:var(--ink);
+}
+.meta--ash{ color:var(--ash); }
+.meta--wine{ color:var(--wine); }
+.meta-stack{ display:grid; gap:.55em; }
+
+/* eyebrow = the table-edge rule + a mono label */
+.eyebrow{
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--wine);
+  display:block;
+}
+.eyebrow::before{
+  content:"";
+  display:block;
+  width:56px; height:3px;
+  background:var(--wine);
+  margin-bottom:22px;
+}
+.eyebrow--bare::before{ display:none; }
+
+/* the device: one horizontal rule = the table edge */
+.rule{ height:1px; background:var(--hair); border:0; margin:0; }
+.rule--wine{ height:2px; background:var(--wine); }
+.rule--short{ width:56px; height:3px; background:var(--wine); border:0; }
+.on-grey .rule{ background:var(--hair-grey); }
+
+/* drop cap — one only, on the About lede */
+.dropcap::first-letter{
+  font-family:var(--display);
+  font-weight:600;
+  font-variation-settings:var(--wonk-on);
+  color:var(--wine);
+  float:left;
+  font-size:4.6em;
+  line-height:.82;
+  padding:.06em .12em 0 0;
+}
+
+/* ---------- 5. Header & wordmark ----------
+   Interior pages: sticky, stays in flow.
+   Home: --over is fixed so the film runs corner to corner beneath it. */
+.site-header{
+  position:sticky; top:0; z-index:60;
+  padding-top:38px; background:var(--cream);
+  transition:padding .25s ease,background .25s ease,box-shadow .25s ease;
+}
+.site-header .bar{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:32px; padding-bottom:26px;
+}
+/* condensed state once the page scrolls */
+.site-header.is-solid{
+  padding-top:16px;
+  background:rgba(250,246,238,.94);
+  backdrop-filter:blur(14px) saturate(1.1);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  box-shadow:0 1px 0 var(--hair);
+}
+.site-header.is-solid .bar{ padding-bottom:14px; border-bottom:0; }
+.site-header.is-solid .wordmark .top{ font-size:24px; }
+
+/* immediate-contact cluster in the top bar */
+.nav-actions{ display:flex; align-items:center; gap:12px; margin-left:8px; }
+.icon-btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5em;
+  height:40px; padding:0 16px; border-radius:999px;
+  border:1.5px solid var(--wine); color:var(--wine);
+  text-decoration:none; font-size:14px; font-weight:600;
+  font-family:var(--sans); white-space:nowrap;
+  transition:background .2s ease,color .2s ease;
+}
+.icon-btn svg{ width:17px; height:17px; fill:currentColor; flex:none; }
+.icon-btn:hover{ background:var(--wine); color:var(--cream); }
+.icon-btn--wa{ border-color:var(--wa); color:var(--wa-ink); }
+.icon-btn--wa svg{ fill:var(--wa); }
+.icon-btn--wa:hover{ background:var(--wa); color:#fff; }
+.icon-btn--wa:hover svg{ fill:#fff; }
+.icon-btn--icononly{ padding:0; width:40px; }
+.icon-btn--icononly svg{ width:19px; height:19px; }
+.wordmark{ display:inline-block; text-decoration:none; }
+.wordmark .top{
+  font-family:var(--display);
+  font-weight:600;
+  font-variation-settings:var(--wonk-on);
+  text-transform:uppercase;
+  color:var(--wine);
+  font-size:29px;
+  letter-spacing:.004em;
+  line-height:.94;
+  display:block;
+}
+.wordmark .rule-mark{
+  height:2px; background:var(--wine); margin:5px 0 6px; width:100%;
+}
+.wordmark .bottom{
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:14px;
+  letter-spacing:.40em;
+  text-transform:uppercase;
+  color:var(--wine);
+  display:block;
+}
+.nav{ display:flex; gap:clamp(20px,2.6vw,44px); align-items:center; padding-top:6px; }
+.nav a{
+  font-family:var(--sans);
+  font-size:15px;
+  font-weight:400;
+  color:var(--ash);
+  text-decoration:none;
+  padding-bottom:3px;
+  border-bottom:1.5px solid transparent;
+}
+.nav a:hover{ color:var(--wine); }
+.nav a[aria-current="page"]{ color:var(--wine); border-bottom-color:var(--wine); }
+
+/* ---------- 6. Buttons & links ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  background:var(--wine);
+  color:var(--cream);
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.005em;
+  text-decoration:none;
+  padding:19px 34px;
+  border-radius:999px;
+  border:0;
+}
+.btn:hover{ background:var(--wine-deep); }
+.btn--ghost{
+  background:transparent;
+  color:var(--wine);
+  border:1.5px solid var(--wine);
+  padding:17.5px 32px;
+}
+.btn--ghost:hover{ background:var(--wine); color:var(--cream); }
+.btn-row{ display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
+
+.link-arrow{
+  display:inline-flex; align-items:center; gap:.6em;
+  font-family:var(--sans); font-weight:500; font-size:16px;
+  color:var(--wine); text-decoration:none;
+  border-bottom:1.5px solid var(--wine);
+  padding-bottom:2px;
+}
+.link-arrow .arw{ border-bottom:0; }
+
+/* ---------- 7a. Full-viewport video hero (home) ----------
+   Corner to corner on desktop. Wine may NOT sit on a dark field
+   (handbook prohibition: 1.8:1) — so all hero type is cream.      */
+.hero-film{
+  position:relative;
+  height:100vh; min-height:660px;
+  width:100%;
+  overflow:hidden;
+  background:var(--ink);
+  display:flex; flex-direction:column;
+}
+.hero-film__media{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.08) brightness(.82);
+  transform:scale(1.16);          /* pushes the generator watermark toward the frame edge */
+  transform-origin:34% 34%;
+  z-index:0;
+}
+.hero-film__scrim{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    /* buries the residual generator watermark in the bottom-right corner */
+    radial-gradient(58% 46% at 100% 100%,rgba(26,22,19,.92) 0%,rgba(26,22,19,.55) 45%,rgba(26,22,19,0) 78%),
+    linear-gradient(to bottom,rgba(26,22,19,.62) 0%,rgba(26,22,19,.18) 30%,rgba(26,22,19,.34) 58%,rgba(26,22,19,.84) 100%),
+    linear-gradient(to right,rgba(26,22,19,.55) 0%,rgba(26,22,19,.10) 58%,rgba(26,22,19,0) 100%);
+}
+.hero-film__inner{ position:relative; z-index:2; display:flex; flex-direction:column; height:100%; }
+.hero-film__body{ margin-top:auto; padding-bottom:clamp(56px,6.5vw,104px); }
+.hero-film .eyebrow{ color:var(--cream); }
+.hero-film .eyebrow::before{ background:var(--cream); }
+.hero-film h1{ color:var(--cream); margin:26px 0 0; max-width:16ch; }
+.hero-film .lead{ color:rgba(250,246,238,.86); margin-top:28px; font-weight:300; }
+.hero-film .btn-row{ margin-top:40px; }
+.hero-film .btn{ background:var(--wine); color:var(--cream); }
+.hero-film .btn:hover{ background:var(--wine-deep); }
+.hero-film .cta-note{ color:rgba(250,246,238,.78); font-size:15px; }
+.hero-film__foot{
+  position:relative; z-index:3; margin-top:auto;
+  border-top:1px solid var(--wine);
+}
+.hero-film__body{ margin-top:auto; padding-bottom:clamp(44px,5vw,72px); }
+.hero-film__foot .wrap{
+  display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  padding-block:20px;
+}
+.hero-film__foot .meta{ color:rgba(250,246,238,.88); }
+/* header sitting over the film — fixed, so the film runs corner to corner */
+.site-header--over{
+  position:fixed; top:0; left:0; right:0; z-index:60;
+  background:transparent; padding-top:34px;
+}
+.site-header--over .bar{ border-bottom:1px solid rgba(250,246,238,.26); }
+.site-header--over .wordmark .top,
+.site-header--over .wordmark .bottom{ color:var(--cream); }
+.site-header--over .wordmark .rule-mark{ background:var(--cream); }
+.site-header--over .nav a{ color:rgba(250,246,238,.82); }
+.site-header--over .nav a:hover,
+.site-header--over .nav a[aria-current="page"]{ color:var(--cream); border-bottom-color:var(--cream); }
+.site-header--over .icon-btn{ border-color:rgba(250,246,238,.5); color:var(--cream); }
+.site-header--over .icon-btn:hover{ background:var(--cream); color:var(--wine); }
+.site-header--over .icon-btn--wa{ border-color:var(--wa); color:var(--cream); }
+.site-header--over .icon-btn--wa svg{ fill:var(--wa); }
+.site-header--over .icon-btn--wa:hover{ background:var(--wa); color:#fff; }
+.site-header--over .icon-btn--wa:hover svg{ fill:#fff; }
+/* once scrolled, the overlay header resolves into the solid cream bar */
+.site-header--over.is-solid{ background:rgba(250,246,238,.94); }
+.site-header--over.is-solid .bar{ border-bottom:0; }
+.site-header--over.is-solid .wordmark .top,
+.site-header--over.is-solid .wordmark .bottom{ color:var(--wine); }
+.site-header--over.is-solid .wordmark .rule-mark{ background:var(--wine); }
+.site-header--over.is-solid .nav a{ color:var(--ash); }
+.site-header--over.is-solid .nav a:hover{ color:var(--wine); }
+.site-header--over.is-solid .icon-btn{ border-color:var(--wine); color:var(--wine); }
+.site-header--over.is-solid .icon-btn--wa{ border-color:var(--wa); color:var(--wa-ink); }
+
+/* ---------- 7c. Sticky WhatsApp affordance ---------- */
+.wa-float{
+  position:fixed; right:26px; bottom:26px; z-index:80;
+  width:60px; height:60px; border-radius:50%;
+  background:var(--wa); color:#fff;
+  display:inline-flex; align-items:center; justify-content:center;
+  text-decoration:none;
+  box-shadow:0 6px 22px rgba(26,22,19,.28);
+  animation:wa-ring 2.8s ease-out infinite;
+}
+.wa-float svg{ width:31px; height:31px; fill:#fff; animation:wa-breathe 2.8s ease-in-out infinite; }
+.wa-float:hover{ background:#1ebe5a; }
+.wa-float__label{
+  position:absolute; right:74px; top:50%; transform:translateY(-50%);
+  white-space:nowrap; background:var(--ink); color:var(--cream);
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; padding:9px 13px; border-radius:3px;
+  opacity:0; pointer-events:none; transition:opacity .2s ease;
+}
+.wa-float:hover .wa-float__label{ opacity:1; }
+@keyframes wa-ring{
+  0%   { box-shadow:0 6px 22px rgba(26,22,19,.28), 0 0 0 0   rgba(37,211,102,.50); }
+  70%  { box-shadow:0 6px 22px rgba(26,22,19,.28), 0 0 0 20px rgba(37,211,102,0);   }
+  100% { box-shadow:0 6px 22px rgba(26,22,19,.28), 0 0 0 0   rgba(37,211,102,0);   }
+}
+@keyframes wa-breathe{
+  0%,100%{ transform:scale(1); }
+  50%    { transform:scale(1.09); }
+}
+@media (prefers-reduced-motion:reduce){
+  .wa-float,.wa-float svg{ animation:none; }
+}
+
+/* ---------- 7b. Standard cream hero (interior pages) ---------- */
+.hero{ padding-top:clamp(56px,7vw,104px); padding-bottom:0; }
+.hero h1{ margin:26px 0 0; max-width:15ch; }
+.hero .lead{ margin-top:30px; }
+.hero .btn-row{ margin-top:42px; }
+.hero .hero-foot{ margin-top:clamp(52px,6vw,88px); }
+.hero .hero-foot .rule{ margin-bottom:22px; }
+
+/* ---------- 8. Full-bleed photo band + seam ---------- */
+/* background matches the page so a missing image fails invisibly
+   instead of slabbing black across the layout */
+.band{ position:relative; background:var(--cream); overflow:hidden; }
+.band:has(img[src=""]),.band:empty{ display:none; }
+.band img,.band video{
+  width:100%; height:clamp(340px,44vw,620px);
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.06) brightness(.94);
+}
+.band--tall img,.band--tall video{ height:clamp(420px,52vw,760px); }
+.band--short img,.band--short video{ height:clamp(260px,30vw,420px); }
+/* gradient fade into the following surface + wine hairline seam */
+.band::after{
+  content:""; position:absolute; left:0; right:0; bottom:0;
+  height:42%;
+  background:linear-gradient(to bottom,rgba(250,246,238,0) 0%,rgba(250,246,238,.72) 62%,var(--cream) 100%);
+  pointer-events:none;
+}
+.band--to-grey::after{
+  background:linear-gradient(to bottom,rgba(237,228,214,0) 0%,rgba(237,228,214,.72) 62%,var(--cream-deep) 100%);
+}
+.band--to-light::after{
+  background:linear-gradient(to bottom,rgba(247,242,233,0) 0%,rgba(247,242,233,.72) 62%,var(--cream-light) 100%);
+}
+.seam{ height:1px; background:var(--wine); position:relative; z-index:2; }
+.seam-label{
+  position:relative; z-index:3; margin-top:-1px;
+  padding-top:26px; background:transparent;
+}
+
+/* ---------- 9. Feature: the event number ---------- */
+.event-no{
+  font-family:var(--display);
+  font-weight:600;
+  font-variation-settings:'SOFT' 30,'WONK' 1,'opsz' 144;
+  color:var(--wine);
+  font-size:clamp(72px,9.4vw,136px);
+  line-height:.94;
+  letter-spacing:-.02em;
+  display:block;
+}
+.event-no sup{ font-size:.46em; vertical-align:.72em; letter-spacing:0; }
+.feature-meta{ margin-top:26px; }
+.feature-meta .rule{ margin-bottom:22px; }
+.feature-body{ max-width:70ch; }
+.feature-body .rule{ margin:26px 0; }
+.speaker{ font-weight:600; font-size:17px; color:var(--ink); margin-top:14px; }
+.affil{ color:var(--ash); font-size:16px; }
+
+/* ---------- 10. Cards ---------- */
+.card{
+  background:var(--cream-light);
+  padding:34px 32px 38px;
+  position:relative;
+}
+.card::before{
+  content:""; position:absolute; top:0; left:0;
+  width:56px; height:3px; background:var(--wine);
+}
+.card .fig{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  color:var(--wine); font-size:clamp(24px,2vw,30px);
+  line-height:1.1; display:block; margin-bottom:12px;
+}
+.card p{ color:var(--ash); font-size:15px; line-height:1.55; }
+.card--outline{ background:transparent; border:1px solid var(--hair); }
+
+/* ---------- 11. Steps / timeline ---------- */
+.steps{ display:grid; gap:0; margin-top:12px; }
+.step{
+  display:grid; grid-template-columns:130px minmax(160px,220px) 1fr;
+  gap:clamp(20px,3vw,48px);
+  padding:30px 0;
+  border-top:1px solid var(--hair);
+  align-items:baseline;
+}
+.step:last-child{ border-bottom:1px solid var(--hair); }
+.step .t{ font-family:var(--mono); font-weight:500; font-size:13px; letter-spacing:.1em; color:var(--wine); }
+.step .n{ font-family:var(--display); font-weight:600; font-variation-settings:var(--wonk-off); font-size:21px; color:var(--ink); }
+.step p{ color:var(--ash); font-size:16px; margin:0; }
+
+/* ---------- 12. Archive list ---------- */
+.archive{ margin-top:14px; }
+.arch-row{
+  display:grid;
+  grid-template-columns:104px 1fr minmax(180px,240px);
+  gap:clamp(20px,3vw,48px);
+  padding:34px 0;
+  border-top:1px solid var(--hair);
+  align-items:start;
+}
+.arch-row:last-child{ border-bottom:1px solid var(--hair); }
+.arch-row .no{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:'SOFT' 30,'WONK' 1,'opsz' 96;
+  font-size:38px; line-height:1; color:var(--wine);
+}
+.arch-row .no sup{ font-size:.5em; vertical-align:.7em; }
+.arch-row h3{ margin-bottom:8px; }
+.arch-row .guest{ font-weight:500; color:var(--ink); font-size:16px; }
+.arch-row .argued{ color:var(--ash); font-size:16px; margin-top:12px; max-width:62ch; }
+.arch-row .when{ text-align:right; }
+
+/* portrait medallion — grayscale, wine ring */
+.medallion{
+  width:112px; height:112px; border-radius:50%;
+  object-fit:cover; filter:grayscale(1) contrast(1.05);
+  border:1.5px solid var(--wine);
+  padding:4px; background:var(--cream);
+}
+
+/* ---------- 13. Two-column do/don't lists ---------- */
+.list-tick li,.list-cross li{
+  padding:13px 0 13px 30px; position:relative;
+  border-bottom:1px solid var(--hair);
+  font-size:16px; color:var(--ink);
+}
+.list-tick li::before,.list-cross li::before{
+  position:absolute; left:0; top:13px;
+  font-family:var(--mono); font-size:13px; color:var(--wine);
+}
+.list-tick li::before{ content:"—"; }
+.list-cross li::before{ content:"×"; color:var(--ash); }
+
+/* ---------- 14. Forms ---------- */
+.field{ display:grid; gap:9px; margin-bottom:22px; }
+.field label{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ash);
+}
+.field input,.field textarea,.field select{
+  font-family:var(--sans); font-size:16px; color:var(--ink);
+  background:var(--cream-light);
+  border:1px solid var(--hair);
+  border-radius:0;
+  padding:15px 16px;
+  width:100%;
+}
+.field textarea{ min-height:104px; resize:vertical; }
+.form-note{ font-size:14px; color:var(--ash); margin-top:16px; }
+
+/* ---------- 15. CTA block ---------- */
+.cta-block{ text-align:left; }
+.cta-block h2{ max-width:18ch; }
+.cta-block .lead{ margin-top:22px; }
+.cta-block .btn-row{ margin-top:36px; }
+
+/* ---------- 16. Footer ---------- */
+/* Footer sits on ink — the darkest note, closing the page.
+   NB: the column grid is scoped to a DIRECT child so it cannot
+   collide with <span class="top"> inside .wordmark. */
+.site-footer{ background:var(--footer); padding-block:clamp(64px,6.5vw,96px) 40px; }
+.site-footer > .wrap > .top{
+  display:grid; grid-template-columns:1.7fr 1fr 1fr 1fr;
+  gap:clamp(28px,3vw,56px); padding-bottom:52px;
+}
+.site-footer h4{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:rgba(250,246,238,.55); margin-bottom:18px; font-weight:500;
+}
+.site-footer li{ margin-bottom:11px; }
+.site-footer a{ color:rgba(250,246,238,.88); text-decoration:none; font-size:15px; overflow-wrap:anywhere; }
+.site-footer a:hover{ color:var(--cream); }
+.site-footer .wordmark .top,
+.site-footer .wordmark .bottom{ color:var(--cream); }
+.site-footer .wordmark .rule-mark{ background:var(--cream); }
+.site-footer .tagline{
+  color:rgba(250,246,238,.62); font-size:17px; max-width:30ch;
+  margin-top:24px; font-weight:300; font-style:italic;
+}
+.site-footer .legal{
+  display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  padding-top:26px; border-top:1px solid rgba(250,246,238,.20);
+  font-size:13px; color:rgba(250,246,238,.52);
+}
+
+/* ============================================================
+   16b. DARK SURFACES — where the rhythm comes from.
+   Grey is deliberately absent from the salon pages: per handbook
+   §07 it belongs to Moderation, and cream→grey is a one-step
+   value move that reads muddy. Cream→wine is a ten-step move.
+   ============================================================ */
+.surface-wine{ background:var(--wine-deep); }
+.surface-wine--mid{ background:var(--wine); }
+.surface-ink{ background:var(--ink); }
+
+.on-dark{ color:rgba(250,246,238,.82); }
+.on-dark h1,.on-dark h2,.on-dark h3,
+.on-dark .display,.on-dark .h1,.on-dark .h2,.on-dark .h3{ color:var(--cream); }
+.on-dark .ink{ color:var(--cream); }
+.on-dark .wine{ color:var(--cream); }
+.on-dark p,.on-dark .body-p{ color:rgba(250,246,238,.80); }
+.on-dark .lead{ color:rgba(250,246,238,.78); }
+.on-dark .ash,.on-dark .affil,.on-dark .argued{ color:rgba(250,246,238,.62); }
+.on-dark .speaker,.on-dark .guest{ color:var(--cream); }
+.on-dark .eyebrow{ color:var(--cream); }
+.on-dark .eyebrow::before{ background:var(--cream); }
+.on-dark .meta{ color:rgba(250,246,238,.72); }
+.on-dark .meta--ash{ color:rgba(250,246,238,.55); }
+.on-dark .rule{ background:rgba(250,246,238,.22); }
+.on-dark .rule--wine{ background:var(--cream); }
+.on-dark .step,.on-dark .arch-row,.on-dark .svc-row{ border-color:rgba(250,246,238,.20); }
+.on-dark .step:last-child,.on-dark .arch-row:last-child{ border-bottom-color:rgba(250,246,238,.20); }
+.on-dark .step .t,.on-dark .step .n{ color:var(--cream); }
+.on-dark .arch-row .no,.on-dark .event-no{ color:var(--cream); }
+.on-dark .link-arrow{ color:var(--cream); border-bottom-color:rgba(250,246,238,.6); }
+.on-dark .dropcap::first-letter{ color:var(--cream); }
+/* inverted button on a dark field — cream fill, wine text */
+.on-dark .btn{ background:var(--cream); color:var(--wine-deep); }
+.on-dark .btn:hover{ background:#fff; }
+.on-dark .btn--ghost{ background:transparent; color:var(--cream); border-color:rgba(250,246,238,.55); }
+.on-dark .btn--ghost:hover{ background:var(--cream); color:var(--wine-deep); }
+/* cards on a dark field become tinted glass, not beige panels */
+.on-dark .card{ background:rgba(250,246,238,.07); }
+.on-dark .card::before{ background:var(--cream); }
+.on-dark .card .fig{ color:var(--cream); }
+.on-dark .card p{ color:rgba(250,246,238,.72); }
+.on-dark .field input,.on-dark .field textarea,.on-dark .field select{
+  background:rgba(250,246,238,.09); border-color:rgba(250,246,238,.28); color:var(--cream);
+}
+.on-dark .field label{ color:rgba(250,246,238,.62); }
+.on-dark .form-note{ color:rgba(250,246,238,.58); }
+.on-dark .list-tick li,.on-dark .list-cross li{ color:rgba(250,246,238,.85); border-bottom-color:rgba(250,246,238,.20); }
+.on-dark .list-tick li::before{ color:var(--cream); }
+.on-dark .list-cross li::before{ color:rgba(250,246,238,.5); }
+/* the band above a wine section must fade INTO wine, not cream */
+.band--to-wine::after{
+  background:linear-gradient(to bottom,rgba(74,25,34,0) 0%,rgba(74,25,34,.72) 62%,var(--wine-deep) 100%);
+}
+.band--to-ink::after{
+  background:linear-gradient(to bottom,rgba(26,22,19,0) 0%,rgba(26,22,19,.72) 62%,var(--ink) 100%);
+}
+.seam--cream{ background:var(--cream); }
+
+/* ---------- 16c. Editorial stat row (replaces the 3 beige cards) ---------- */
+.stat-row{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--hair);
+  margin-top:clamp(40px,4.5vw,72px);
+}
+.stat-row .stat{
+  padding:34px 40px 8px 0;
+  border-right:1px solid var(--hair);
+}
+.stat-row .stat + .stat{ padding-left:30px; }
+.stat-row .stat:last-child{ border-right:0; padding-right:0; }
+.stat-row .fig{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:'SOFT' 30,'WONK' 1,'opsz' 96;
+  color:var(--wine); font-size:clamp(34px,3.6vw,52px);
+  line-height:1; display:block; margin-bottom:16px; letter-spacing:-.015em;
+}
+.stat-row p{ color:var(--ash); font-size:16px; line-height:1.5; max-width:30ch; margin:0; }
+.on-dark .stat-row{ border-top-color:rgba(250,246,238,.22); }
+.on-dark .stat-row .stat{ border-right-color:rgba(250,246,238,.22); }
+.on-dark .stat-row .fig{ color:var(--cream); }
+.on-dark .stat-row p{ color:rgba(250,246,238,.70); }
+
+/* ---------- 16d. Hero next-evening widget ---------- */
+.hero-film__grid{
+  display:grid;
+  grid-template-columns:1fr minmax(330px,392px);
+  gap:clamp(36px,5vw,88px);
+  align-items:end;
+}
+.hero-card{
+  background:rgba(20,16,13,.52);
+  backdrop-filter:blur(16px) saturate(.85);
+  -webkit-backdrop-filter:blur(16px) saturate(.85);
+  border:1px solid rgba(250,246,238,.26);
+  border-top:3px solid var(--wine);
+  padding:28px 30px 26px;
+}
+.hero-card__label{
+  font-family:var(--mono); font-weight:500; font-size:11px;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(250,246,238,.62); display:block;
+}
+.hero-card__no{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:'SOFT' 30,'WONK' 1,'opsz' 96;
+  color:var(--cream); font-size:56px; line-height:1;
+  display:block; margin:14px 0 10px; letter-spacing:-.02em;
+}
+.hero-card__no sup{ font-size:.46em; vertical-align:.7em; }
+.hero-card__title{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  color:var(--cream); font-size:25px; line-height:1.18; margin:0 0 10px;
+}
+.hero-card__guest{ color:rgba(250,246,238,.86); font-size:15px; font-weight:500; }
+.hero-card__affil{ color:rgba(250,246,238,.58); font-size:14px; line-height:1.45; }
+.hero-card hr{ border:0; height:1px; background:rgba(250,246,238,.24); margin:20px 0; }
+.hero-card__meta{
+  font-family:var(--mono); font-weight:500; font-size:11.5px;
+  letter-spacing:.13em; text-transform:uppercase;
+  color:rgba(250,246,238,.80); display:grid; gap:6px;
+}
+.hero-card__cta{
+  display:inline-flex; align-items:center; gap:.55em;
+  margin-top:18px; color:var(--cream); text-decoration:none;
+  font-size:15px; font-weight:600;
+  border-bottom:1.5px solid rgba(250,246,238,.65); padding-bottom:2px;
+}
+.hero-card__upcoming{ display:grid; gap:0; }
+.hero-card__upcoming .row{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  padding:11px 0; border-top:1px solid rgba(250,246,238,.16);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:rgba(250,246,238,.58);
+}
+.hero-card__upcoming .row .n{ color:rgba(250,246,238,.85); }
+
+/* ---------- 17. Moderation page — grey dominant, Plex-led ---------- */
+/* Handbook §07: the proportion of surface is what separates the two, not the palette. */
+body.moderation{ background:var(--cream-deep); }
+body.moderation .site-header{ background:var(--cream-deep); }
+body.moderation .section{ padding-block:clamp(56px,6.4vw,104px); }   /* denser */
+body.moderation .h2,
+body.moderation h2.display{
+  font-size:clamp(24px,2.1vw,31px); line-height:1.16; color:var(--ink);
+}
+body.moderation h3.display,body.moderation .h3{ font-size:19px; color:var(--ink); }
+body.moderation .rule{ background:var(--hair-grey); }
+body.moderation .card{ background:var(--cream-light); }
+body.moderation .band::after{
+  background:linear-gradient(to bottom,rgba(237,228,214,0) 0%,rgba(237,228,214,.72) 62%,var(--cream-deep) 100%);
+}
+.svc-row{
+  display:grid; grid-template-columns:minmax(200px,300px) 1fr minmax(150px,190px);
+  gap:clamp(20px,3vw,44px);
+  padding:26px 0; border-top:1px solid var(--hair-grey); align-items:start;
+}
+.svc-row:last-child{ border-bottom:1px solid var(--hair-grey); }
+.svc-row p{ color:var(--ash); font-size:16px; margin:0; }
+.svc-row .fmt{ font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ash); text-align:right; }
+
+/* ---------- 18. Utilities ---------- */
+.mt-s{ margin-top:18px; } .mt-m{ margin-top:32px; } .mt-l{ margin-top:56px; }
+.mb-m{ margin-bottom:32px; } .mb-l{ margin-bottom:56px; }
+.stack-lead > * + *{ margin-top:20px; }
+.maxw-sm{ max-width:52ch; } .maxw-md{ max-width:62ch; }
+.fidelity{
+  position:fixed; left:14px; bottom:14px; z-index:99;
+  font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+  background:var(--wine); color:var(--cream);
+  padding:7px 12px; border-radius:2px; opacity:.9;
+}
+
+/* ============================================================
+   19. MOBILE — must stay last in the stylesheet (source order)
+   Scale per brand handbook §05 mobile column.
+   ============================================================ */
+@media (max-width:820px){
+  body{ font-size:17px; line-height:1.5; }
+  :root{ --gutter:24px; --sp-section:52px; --sp-section-s:44px; }
+
+  h1.display,.h1{ font-size:40px; line-height:1.12; }
+  h2.display,.h2{ font-size:28px; line-height:1.16; }
+  h3.display,.h3{ font-size:22px; }
+  .lead{ font-size:18px; line-height:1.50; }
+  .small{ font-size:14px; }
+  .meta,.eyebrow{ font-size:13px; }
+  .event-no{ font-size:64px; }
+  .arch-row .no{ font-size:30px; }
+
+  /* centre headings, intros, figures, buttons — left-align body & cards */
+  .section > .wrap > .eyebrow,
+  .section > .wrap > h2,
+  .section > .wrap > .lead{ text-align:center; }
+  .section > .wrap > .eyebrow::before{ margin-inline:auto; }
+  .section > .wrap > .lead{ margin-inline:auto; }
+
+  .grid--feature,.grid--3,.grid--2,.grid--split{ grid-template-columns:1fr; }
+  .grid{ gap:24px; }
+
+  .site-header{ padding-top:20px; }
+  .site-header .bar{ padding-bottom:14px; align-items:center; }
+  .nav a{ display:none; }                 /* links collapse … */
+  .nav .nav-actions{ display:flex; }      /* … contact icons stay */
+  .nav .nav-actions a{ display:inline-flex; }
+  .nav{ gap:10px; padding-top:0; }
+  .nav-actions{ margin-left:0; gap:9px; }
+  .icon-btn{ height:38px; padding:0 13px; font-size:13px; }
+  .icon-btn--icononly{ width:38px; padding:0; }
+  .wordmark .top{ font-size:19px; }
+  .wa-float{ right:16px; bottom:16px; width:54px; height:54px; }
+  .wa-float svg{ width:28px; height:28px; }
+  .wa-float__label{ display:none; }
+  .fidelity{ left:10px; bottom:10px; }
+
+  .hero h1{ max-width:none; }
+  .hero .btn-row{ margin-top:30px; flex-direction:column; align-items:stretch; gap:14px; }
+  .btn{ width:100%; padding:17px 24px; font-size:15px; min-height:52px; }
+  .hero .btn-row .small,.hero .btn-row .meta{ text-align:center; }
+
+  .card{ padding:24px; border-radius:0; }
+  .step{ grid-template-columns:1fr; gap:6px; padding:22px 0; }
+  .arch-row{ grid-template-columns:1fr; gap:8px; padding:26px 0; }
+  .arch-row .when{ text-align:left; }
+  .svc-row{ grid-template-columns:1fr; gap:8px; }
+  .svc-row .fmt{ text-align:left; }
+
+  .band img,.band video{ height:300px; }
+  .band--tall img,.band--tall video{ height:340px; }
+
+  /* film hero stacks: copy first, next-evening card beneath it */
+  .hero-film{ height:auto; min-height:0; padding-top:78px; }
+  .hero-film__grid{ grid-template-columns:1fr; gap:34px; align-items:start; }
+  .hero-film__body{ padding-top:40px; padding-bottom:34px; }
+  .hero-film h1{ max-width:none; }
+  .hero-film .lead{ margin-top:20px; }
+  .hero-film .btn-row{ align-items:stretch; }
+  .hero-film .cta-note{ text-align:center; }
+  .hero-card{ padding:22px 22px 20px; }
+  .hero-card__no{ font-size:44px; margin:10px 0 8px; }
+  .hero-card__title{ font-size:22px; }
+  .hero-film__foot .wrap{ flex-direction:column; gap:8px; padding-block:16px; }
+  .hero-film__foot .meta{ font-size:11px; letter-spacing:.1em; }
+  /* the film needs to cover a taller, narrower box on a phone */
+  .hero-film__media{ transform:scale(1.5); transform-origin:42% 40%; }
+
+  .site-footer .top{ grid-template-columns:1fr 1fr; gap:32px; }
+  .site-footer .legal{ flex-direction:column; gap:10px; }
+  .dropcap::first-letter{ font-size:3.6em; }
+}
+
+/* ============================================================
+   20. Contact affordances — chips in CTA blocks, list in footer.
+   Appended after the mobile block, so its own mobile rules are
+   inlined here rather than in section 19.
+   ============================================================ */
+.contact-row{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:28px; }
+.contact-chip{
+  display:inline-flex; align-items:center; gap:.6em;
+  padding:12px 20px; border-radius:999px;
+  border:1.5px solid var(--hair); color:var(--ink);
+  text-decoration:none; font-size:15px; font-weight:500;
+  font-family:var(--sans); white-space:nowrap;
+  transition:border-color .2s ease,color .2s ease;
+}
+.contact-chip svg{ width:16px; height:16px; fill:var(--wine); flex:none; }
+.contact-chip:hover{ border-color:var(--wine); color:var(--wine); }
+.contact-chip--wa svg{ fill:var(--wa); }
+.contact-chip--wa:hover{ border-color:var(--wa); color:var(--wa-ink); }
+.contact-note{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ash); margin-top:16px;
+}
+.on-dark .contact-chip{ border-color:rgba(250,246,238,.38); color:var(--cream); }
+.on-dark .contact-chip svg{ fill:var(--cream); }
+.on-dark .contact-chip--wa svg{ fill:var(--wa); }
+.on-dark .contact-chip:hover{ border-color:var(--cream); color:var(--cream); }
+.on-dark .contact-note{ color:rgba(250,246,238,.6); }
+
+.footer-contact li{ margin-bottom:13px; }
+.footer-contact a{ display:inline-flex; align-items:center; gap:.6em; }
+.footer-contact svg{ width:15px; height:15px; fill:rgba(250,246,238,.62); flex:none; }
+.footer-contact a:hover svg{ fill:var(--cream); }
+.footer-contact .wa svg{ fill:var(--wa); }
+
+@media (max-width:820px){
+  .contact-row{ gap:10px; margin-top:22px; }
+  .contact-chip{ padding:11px 16px; font-size:14px; }
+  .section > .wrap > .contact-row{ justify-content:center; }
+}
+
+/* ============================================================
+   21. Mobile overflow corrections — appended last so these win
+   on source order over sections 16b–20.
+   ============================================================ */
+@media (max-width:820px){
+  /* the editorial stat row was still 3 columns on a phone */
+  .stat-row{ grid-template-columns:1fr; margin-top:34px; }
+  .stat-row .stat{
+    border-right:0; border-bottom:1px solid var(--hair);
+    padding:24px 0 22px;
+  }
+  .stat-row .stat:last-child{ border-bottom:0; padding-bottom:0; }
+  .stat-row .fig{ font-size:30px; margin-bottom:10px; }
+  .stat-row p{ max-width:none; }
+  .on-dark .stat-row .stat{ border-bottom-color:rgba(250,246,238,.22); }
+
+  /* header: WhatsApp collapses to its glyph so the bar fits 390px */
+  .nav-actions .icon-btn--wa span{ display:none; }
+  .nav-actions .icon-btn--wa{ width:38px; padding:0; }
+
+  /* nothing may exceed the viewport */
+  body{ max-width:100vw; overflow-x:hidden; }
+  .contact-chip{ max-width:100%; overflow-wrap:anywhere; white-space:normal; }
+}
+
+/* ============================================================
+   22. Archive speaker portraits + richer media
+   ============================================================ */
+.archive--portraits .arch-row{
+  grid-template-columns:84px 88px 1fr minmax(150px,215px);
+}
+.arch-portrait{
+  width:78px; height:78px; border-radius:50%;
+  object-fit:cover; filter:grayscale(1) contrast(1.06);
+  border:1.5px solid var(--wine); padding:3px; background:var(--cream);
+}
+.on-dark .arch-portrait{ border-color:var(--cream); background:transparent; }
+
+/* a caption sitting under a full-bleed band */
+.band-caption{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ash);
+  padding-top:14px; padding-bottom:2px;
+}
+/* portrait/landscape figure inside a normal section */
+.figure-inset img{
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(1) contrast(1.05);
+  border-top:3px solid var(--wine);
+}
+.figure-inset--tall img{ aspect-ratio:4/5; }
+.figure-inset--wide img{ aspect-ratio:16/10; }
+.figure-inset figcaption{
+  font-family:var(--mono); font-size:11px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ash); margin-top:12px;
+}
+.on-dark .figure-inset figcaption{ color:rgba(250,246,238,.6); }
+
+@media (max-width:820px){
+  .archive--portraits .arch-row{ grid-template-columns:1fr; }
+  .arch-portrait{ width:64px; height:64px; }
+}
+
+/* ============================================================
+   23. Signup bar — sits directly under the hero.
+   Cream Light so it reads as a bright shelf against the dark
+   film above and the cream page below. Wine rule carries the
+   accent; no new colours introduced.
+   ============================================================ */
+.signup{
+  background:var(--cream-light);
+  border-top:3px solid var(--wine);
+  border-bottom:1px solid var(--hair);
+}
+.signup .wrap{
+  display:grid; grid-template-columns:1fr minmax(420px,520px);
+  gap:clamp(32px,5vw,80px); align-items:center;
+  padding-block:clamp(38px,4vw,58px);
+}
+.signup h2{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  color:var(--wine); font-size:clamp(24px,2.3vw,34px);
+  line-height:1.14; letter-spacing:-.005em; margin-bottom:12px;
+}
+.signup p{ color:var(--ash); font-size:16px; line-height:1.55; max-width:62ch; margin:0; }
+.signup-form{ display:flex; gap:12px; align-items:stretch; }
+.signup-form .field{ margin:0; flex:1; gap:0; }
+.signup-form input{
+  height:56px; background:#fff; border:1px solid var(--hair);
+  padding:0 18px; font-size:16px; width:100%; border-radius:0;
+  font-family:var(--sans); color:var(--ink);
+}
+.signup-form input::placeholder{ color:#9a9186; }
+.signup-form input:focus{ outline:2px solid var(--wine); outline-offset:-2px; }
+.signup-form .btn{ height:56px; padding:0 30px; flex:none; }
+.signup-note{
+  font-family:var(--mono); font-size:11px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ash); margin-top:12px;
+}
+
+@media (max-width:820px){
+  .signup .wrap{ grid-template-columns:1fr; gap:22px; padding-block:34px; }
+  .signup h2{ font-size:24px; text-align:center; }
+  .signup p{ text-align:center; margin-inline:auto; }
+  .signup-form{ flex-direction:column; gap:10px; }
+  .signup-form input{ height:52px; }
+  .signup-form .btn{ height:52px; width:100%; }
+  .signup-note{ text-align:center; }
+}
+
+@media (max-width:820px){
+  /* desktop line breaks in display headings must not re-wrap on a phone */
+  .hero-film h1 br,.hero h1 br,.section h2 br{ display:none; }
+  .hero-film h1{ font-size:36px; line-height:1.14; }
+}
+
+/* ============================================================
+   24. Hero notice (summer break) + mobile nav + late fixes.
+   Appended last so these win on source order.
+   ============================================================ */
+
+/* --- Summer-break disclaimer in the hero.
+   Needs to stand out against a dark photograph. A cream fill with
+   wine text is the highest-contrast option that adds no new colour. */
+.hero-notice{
+  display:inline-flex; align-items:center; gap:.7em;
+  background:var(--cream); color:var(--wine-deep);
+  border-radius:999px; padding:11px 20px 11px 16px;
+  font-family:var(--sans); font-size:14.5px; font-weight:600;
+  line-height:1.35; margin-bottom:26px; max-width:100%;
+  box-shadow:0 4px 18px rgba(20,16,13,.35);
+}
+.hero-notice .dot{
+  width:9px; height:9px; border-radius:50%;
+  background:var(--wine); flex:none;
+  animation:notice-pulse 2.4s ease-in-out infinite;
+}
+.hero-notice strong{ font-weight:700; }
+@keyframes notice-pulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
+@media (prefers-reduced-motion:reduce){ .hero-notice .dot{ animation:none; } }
+
+/* --- Mobile navigation. Previously the links simply vanished with
+   no replacement, leaving no route between pages on a phone. */
+.nav-toggle{
+  display:none; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:999px;
+  border:1.5px solid var(--wine); background:transparent;
+  cursor:pointer; padding:0;
+}
+.nav-toggle span{
+  display:block; width:17px; height:1.5px; background:var(--wine);
+  position:relative;
+}
+.nav-toggle span::before,.nav-toggle span::after{
+  content:""; position:absolute; left:0; width:17px; height:1.5px; background:var(--wine);
+}
+.nav-toggle span::before{ top:-5.5px; }
+.nav-toggle span::after{ top:5.5px; }
+.site-header--over:not(.is-solid) .nav-toggle{ border-color:rgba(250,246,238,.5); }
+.site-header--over:not(.is-solid) .nav-toggle span,
+.site-header--over:not(.is-solid) .nav-toggle span::before,
+.site-header--over:not(.is-solid) .nav-toggle span::after{ background:var(--cream); }
+
+@media (max-width:820px){
+  .nav-toggle{ display:inline-flex; order:3; }
+
+  /* the links become a drawer instead of disappearing */
+  .nav{ flex-wrap:wrap; justify-content:flex-end; }
+  .nav a{ display:none; }
+  body.nav-open .site-header .nav a{
+    display:block; width:100%; order:9;
+    font-family:var(--display); font-weight:600;
+    font-size:23px; color:var(--wine); border-bottom:0;
+    padding:13px 0; text-align:left;
+  }
+  body.nav-open .site-header{
+    background:var(--cream); box-shadow:0 1px 0 var(--hair);
+  }
+  body.nav-open .site-header--over .wordmark .top,
+  body.nav-open .site-header--over .wordmark .bottom{ color:var(--wine); }
+  body.nav-open .site-header--over .wordmark .rule-mark{ background:var(--wine); }
+  body.nav-open .site-header--over .nav-toggle{ border-color:var(--wine); }
+  body.nav-open .site-header--over .nav-toggle span,
+  body.nav-open .site-header--over .nav-toggle span::before,
+  body.nav-open .site-header--over .nav-toggle span::after{ background:var(--wine); }
+  body.nav-open .site-header .bar{ padding-bottom:20px; }
+
+  /* --- BUG: this override lost on specificity, so the 4-column footer
+     grid survived at 390px and broke words mid-syllable. */
+  .site-footer > .wrap > .top{ grid-template-columns:1fr 1fr; gap:30px; }
+  .site-footer .wordmark .top{ font-size:20px; }
+
+  /* --- FAB was sitting on top of body copy */
+  .wa-float{ right:14px; bottom:14px; width:50px; height:50px; }
+  .wa-float svg{ width:25px; height:25px; }
+
+  /* --- tracked mono was too wide for 390px and orphaned words */
+  .meta,.eyebrow,.hero-card__meta,.signup-note,.contact-note,.svc-row .fmt{
+    font-size:11.5px; letter-spacing:.08em;
+  }
+
+  /* --- eyebrow alignment was centred in some sections, left in others */
+  .section > .wrap > .eyebrow,
+  .section > .wrap > h2,
+  .section > .wrap > .lead{ text-align:left; }
+  .section > .wrap > .eyebrow::before{ margin-inline:0; }
+  .section > .wrap > .lead{ margin-inline:0; }
+  .section > .wrap > .contact-row{ justify-content:flex-start; }
+
+  .hero-notice{ font-size:13.5px; padding:10px 16px 10px 13px; margin-bottom:20px; }
+}
+
+/* ============================================================
+   25. Hero fit — the longer H1 plus the notice overran the header
+   ============================================================ */
+.hero-film__body{ padding-top:clamp(120px,13vh,170px); }
+.hero-film h1{ font-size:clamp(38px,4.3vw,64px); line-height:1.09; max-width:18ch; }
+.hero-film .lead{ font-size:clamp(17px,1.2vw,19px); max-width:52ch; }
+.hero-film__grid{ align-items:end; }
+@media (max-width:820px){
+  .hero-film__body{ padding-top:26px; }
+  .hero-film h1{ font-size:34px; max-width:none; }
+}
+
+/* ============================================================
+   26. Hero signup — centred in the lower third of the first view.
+   Sits on the film, so it is built from a hairline and blur
+   rather than a filled panel: no new colour, no new weight.
+   ============================================================ */
+.hero-signup{ position:relative; z-index:3; text-align:center; padding-bottom:clamp(24px,3vh,40px); }
+.hero-signup .wrap{ max-width:660px; }
+.hero-signup__label{
+  display:block; font-family:var(--mono); font-weight:500;
+  font-size:11.5px; letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(250,246,238,.78); margin-bottom:16px;
+}
+.hero-signup__form{
+  display:flex; align-items:center; gap:6px;
+  background:rgba(20,16,13,.46);
+  backdrop-filter:blur(16px) saturate(.9);
+  -webkit-backdrop-filter:blur(16px) saturate(.9);
+  border:1px solid rgba(250,246,238,.34);
+  border-radius:999px; padding:6px 6px 6px 4px;
+  max-width:560px; margin:0 auto;
+  transition:border-color .2s ease;
+}
+.hero-signup__form:focus-within{ border-color:rgba(250,246,238,.7); }
+.hero-signup__form input{
+  flex:1; min-width:0; height:50px;
+  background:transparent; border:0; outline:0;
+  color:var(--cream); font-family:var(--sans); font-size:16px;
+  padding:0 12px 0 22px;
+}
+.hero-signup__form input::placeholder{ color:rgba(250,246,238,.5); }
+.hero-signup__form .btn{ height:50px; padding:0 28px; flex:none; font-size:14.5px; }
+.hero-signup__note{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:rgba(250,246,238,.55);
+  margin-top:14px; max-width:none;
+}
+@media (max-width:820px){
+  .hero-signup{ padding-bottom:20px; }
+  .hero-signup__label{ font-size:10.5px; letter-spacing:.14em; margin-bottom:12px; }
+  .hero-signup__form{ flex-direction:column; border-radius:16px; padding:10px; gap:8px; }
+  .hero-signup__form input{ width:100%; height:46px; padding:0 14px; text-align:center; }
+  .hero-signup__form .btn{ width:100%; height:48px; }
+  .hero-signup__note{ font-size:9.5px; }
+}
+
+/* ============================================================
+   27. DSGVO — cookie notice + form consent
+   This site sets no tracking cookies and self-hosts its fonts,
+   so this is an information notice, not a consent gate.
+   ============================================================ */
+.cookie-note{
+  position:fixed; left:0; right:0; bottom:0; z-index:90;
+  background:var(--cream-light);
+  border-top:3px solid var(--wine);
+  box-shadow:0 -6px 28px rgba(26,22,19,.16);
+  padding:20px 0;
+}
+.cookie-note[hidden]{ display:none; }
+.cookie-note .wrap{
+  display:flex; align-items:center; gap:clamp(20px,3vw,44px);
+  justify-content:space-between; flex-wrap:wrap;
+}
+.cookie-note p{
+  margin:0; font-size:14.5px; line-height:1.5; color:var(--ink); max-width:74ch;
+}
+.cookie-note a{ color:var(--wine); }
+.cookie-note .btn{ height:46px; padding:0 28px; font-size:14px; flex:none; }
+.cookie-note__actions{ display:flex; align-items:center; gap:16px; flex:none; }
+
+.consent{
+  display:flex; align-items:flex-start; gap:11px;
+  margin:4px 0 20px; font-size:13.5px; line-height:1.5; color:var(--ash);
+}
+.consent input{
+  width:17px; height:17px; margin:2px 0 0; flex:none;
+  accent-color:var(--wine);
+}
+.consent a{ color:var(--wine); }
+.on-dark .consent{ color:rgba(250,246,238,.72); }
+.on-dark .consent a{ color:var(--cream); }
+
+@media (max-width:820px){
+  .cookie-note{ padding:16px 0; }
+  .cookie-note .wrap{ flex-direction:column; align-items:stretch; gap:14px; }
+  .cookie-note p{ font-size:13.5px; }
+  .cookie-note__actions{ flex-direction:column; align-items:stretch; gap:10px; }
+  .cookie-note .btn{ width:100%; }
+  .wa-float{ bottom:132px; }   /* clear of the notice bar */
+}
+
+/* 28. Shorter two-line H1 can carry more size */
+.hero-film h1{ font-size:clamp(42px,5.4vw,82px); line-height:1.06; max-width:14ch; }
+@media (max-width:820px){ .hero-film h1{ font-size:38px; line-height:1.1; max-width:none; } }
+
+/* 29. Two-line H1 must hold two lines; signup note must hold one */
+.hero-film h1{ font-size:clamp(40px,4.7vw,70px); max-width:22ch; }
+.hero-signup .wrap{ max-width:760px; }
+.hero-signup__note{ white-space:nowrap; }
+@media (max-width:820px){
+  .hero-film h1{ font-size:34px; max-width:none; }
+  .hero-signup__note{ white-space:normal; }
+}
+
+/* ============================================================
+   30. iPhone polish — MUST STAY LAST IN THE FILE.
+   Measured at 390px (iPhone 13/14/15) and 375px (SE) with real
+   mobile emulation. Layout already fitted the viewport on every
+   page; what failed was touch ergonomics — 22 controls sat under
+   Apple's 44pt minimum — plus the footer address breaking
+   mid-word. Everything below is hit-area and legibility only, so
+   it changes no desktop rendering and no brand colour.
+   ============================================================ */
+@media (max-width:820px){
+
+  /* --- 30a. Tap targets to Apple's 44pt floor ---------------- */
+  /* Header contact cluster: these are the two things a phone user
+     actually reaches for, and they were the smallest. */
+  .icon-btn{ height:44px; padding:0 16px; }
+  .icon-btn--icononly{ width:44px; padding:0; }
+  .nav-toggle{ width:44px; height:44px; }
+  .wordmark{ padding-block:2px; }
+
+  /* Standalone arrow links were 26–27px — pure text with no box. */
+  .link-arrow,
+  .hero-card__cta{
+    display:inline-flex; align-items:center;
+    min-height:44px;
+  }
+
+  /* Footer links were 19px stacked 11px apart: two failures at once,
+     too small to hit and too close to hit accurately. The min-height
+     absorbs the old margin rather than adding to it. */
+  .site-footer li{ margin-bottom:0; }
+  .site-footer .top a,
+  .site-footer .legal a{
+    display:inline-flex; align-items:center;
+    min-height:44px;
+  }
+
+  /* Consent checkbox at 17px is below the floor for a control that
+     gates a form submit. The label gets the padded hit area too. */
+  .consent{ gap:14px; align-items:center; }
+  .consent input{ width:24px; height:24px; margin:0; }
+  .consent label,
+  .consent > span{ padding-block:10px; }
+
+  /* --- 30b. Footer address must not break mid-word ------------ */
+  /* Two 155px columns can't hold fabian@thesalonberlin.de at 15px,
+     so overflow-wrap:anywhere was splitting it as "thesalonbe/rlin.de".
+     One column per row gives it the full measure instead. */
+  .site-footer > .wrap > .top{ grid-template-columns:1fr; gap:34px; }
+  .site-footer a{ overflow-wrap:normal; word-break:normal; }
+  .footer-contact a{ font-size:15px; }
+
+  /* --- 30c. bizee scale confirmations ------------------------- */
+  /* Section headings and their intros centre; cards and lists stay
+     left. Buttons are already full-width 52px from section 19. */
+  .site-footer .tagline,
+  .site-footer .legal{ text-align:center; justify-content:center; }
+}
+
+/* iPhone SE and anything narrower: the header cluster is the only
+   thing that gets genuinely tight once both contact buttons are 44px. */
+@media (max-width:380px){
+  .icon-btn--wa span{ display:none; }        /* icon only, label drops */
+  .icon-btn--wa{ width:44px; padding:0; justify-content:center; }
+}
+
+/* 30. The two-line H1 is short enough to keep its break on mobile.
+   (Rule 24 strips desktop breaks generally; the hero opts back in.) */
+@media (max-width:820px){ .hero-film h1 br{ display:block; } }
+
+/* 31. Longer second line — hold it to two lines without shrinking too far */
+.hero-film h1{ font-size:clamp(38px,4.05vw,60px); max-width:26ch; letter-spacing:-.012em; }
+@media (max-width:820px){ .hero-film h1{ font-size:31px; max-width:none; letter-spacing:-.01em; } }
+
+/* 32. Give the headline column the room it needs for the longer second line */
+.hero-film__grid{ grid-template-columns:1fr minmax(320px,358px); gap:clamp(32px,3.6vw,64px); }
+.hero-film h1{ font-size:clamp(38px,3.85vw,57px); max-width:none; }
+@media (max-width:820px){
+  .hero-film__grid{ grid-template-columns:1fr; gap:34px; }
+  .hero-film h1{ font-size:30px; }
+}
+
+/* 33. Measured fit: the copy column is 772px at 1600, so the 29-character
+   second line needs ~52px to hold one line. */
+.hero-film__grid{ grid-template-columns:1fr minmax(310px,336px); gap:clamp(30px,3vw,52px); }
+.hero-film h1{ font-size:clamp(34px,3.35vw,52px); }
+@media (max-width:820px){
+  .hero-film__grid{ grid-template-columns:1fr; gap:32px; }
+  .hero-film h1{ font-size:30px; }
+}
+
+/* ============================================================
+   34. Mobile menu — full-screen wine panel, ledger-styled.
+   Replaces the inline link expansion, which was not a design.
+   ============================================================ */
+.m-menu{
+  position:fixed; inset:0; z-index:95;
+  background:var(--wine-deep);
+  display:none; flex-direction:column;
+  overflow-y:auto; -webkit-overflow-scrolling:touch;
+}
+body.nav-open .m-menu{ display:flex; }
+body.nav-open{ overflow:hidden; }
+
+.m-menu__bar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 24px 16px; border-bottom:1px solid rgba(250,246,238,.22);
+}
+.m-menu__bar .wordmark .top,
+.m-menu__bar .wordmark .bottom{ color:var(--cream); }
+.m-menu__bar .wordmark .rule-mark{ background:var(--cream); }
+.m-menu__close{
+  width:42px; height:42px; border-radius:999px; flex:none;
+  border:1.5px solid rgba(250,246,238,.5); background:transparent;
+  position:relative; cursor:pointer; padding:0;
+}
+.m-menu__close::before,.m-menu__close::after{
+  content:""; position:absolute; left:50%; top:50%; width:16px; height:1.5px;
+  background:var(--cream); transform-origin:center;
+}
+.m-menu__close::before{ transform:translate(-50%,-50%) rotate(45deg); }
+.m-menu__close::after{ transform:translate(-50%,-50%) rotate(-45deg); }
+
+.m-menu__links{ padding:8px 24px 0; }
+.m-menu__links a{
+  display:flex; align-items:baseline; gap:16px;
+  padding:20px 0; text-decoration:none;
+  border-bottom:1px solid rgba(250,246,238,.18);
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  font-size:30px; line-height:1.1; color:var(--cream);
+}
+.m-menu__links a .n{
+  font-family:var(--mono); font-weight:500; font-size:11px;
+  letter-spacing:.16em; color:rgba(250,246,238,.5);
+  min-width:26px; flex:none;
+}
+.m-menu__links a[aria-current="page"]{ color:var(--cream); }
+.m-menu__links a[aria-current="page"] .n{ color:var(--cream); }
+
+.m-menu__foot{ margin-top:auto; padding:28px 24px 34px; }
+.m-menu__foot .rule{ background:rgba(250,246,238,.22); margin-bottom:22px; }
+.m-menu__contact{ display:grid; gap:12px; margin-bottom:24px; }
+.m-menu__contact a{
+  display:inline-flex; align-items:center; gap:.7em;
+  color:var(--cream); text-decoration:none; font-size:15px;
+}
+.m-menu__contact svg{ width:16px; height:16px; fill:rgba(250,246,238,.75); flex:none; }
+.m-menu__contact .wa svg{ fill:var(--wa); }
+.m-menu__cta{ display:flex; gap:10px; }
+.m-menu__cta .btn{ flex:1; background:var(--cream); color:var(--wine-deep); }
+.m-menu__slogan{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.16em;
+  text-transform:uppercase; color:rgba(250,246,238,.5); margin-top:22px;
+}
+@media (min-width:821px){ .m-menu{ display:none !important; } }
+
+/* the old inline expansion is retired */
+@media (max-width:820px){
+  body.nav-open .site-header .nav a{ display:none; }
+  body.nav-open .site-header{ background:transparent; box-shadow:none; }
+}
+
+/* ============================================================
+   35. Condensed sticky bar must be OPAQUE.
+   At .94 alpha the scrolled content ghosted through the bar and
+   read as if the header contents were cut off at the bottom.
+   ============================================================ */
+.site-header.is-solid,
+.site-header--over.is-solid{
+  background:var(--cream);
+  backdrop-filter:none; -webkit-backdrop-filter:none;
+  box-shadow:0 1px 0 var(--hair), 0 6px 18px rgba(26,22,19,.06);
+  padding-top:14px;
+}
+.site-header.is-solid .bar{ padding-bottom:14px; align-items:center; }
+body.moderation .site-header.is-solid{ background:var(--cream-deep); }
+
+/* 36. Anchored sections must not land under the sticky bar */
+html{ scroll-padding-top:96px; scroll-behavior:smooth; }
+[id]{ scroll-margin-top:96px; }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
