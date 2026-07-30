@@ -115,6 +115,15 @@
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();
         })
+        .then(function (data) {
+          // FormSubmit answers 200 even when it refuses the submission —
+          // an unactivated form comes back {"success":"false"}. Trusting the
+          // status alone would show the thank-you while the message was
+          // dropped, which is the one failure the user must never see.
+          var okFlag = data && (data.success === true || data.success === 'true');
+          if (!okFlag) throw new Error((data && data.message) || 'relay refused');
+          return data;
+        })
         .then(function () {
           form.reset();
           open({
