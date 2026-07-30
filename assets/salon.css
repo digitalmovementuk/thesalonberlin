@@ -1221,7 +1221,7 @@ body.moderation .band::after{
   .icon-btn{ height:44px; padding:0 16px; }
   .icon-btn--icononly{ width:44px; padding:0; }
   .nav-toggle{ width:44px; height:44px; }
-  .wordmark{ padding-block:2px; }
+  .wordmark{ padding-block:3px; }   /* 43px → 44px, the last one under */
 
   /* Standalone arrow links were 26–27px — pure text with no box. */
   .link-arrow,
@@ -1255,7 +1255,17 @@ body.moderation .band::after{
   .site-footer a{ overflow-wrap:normal; word-break:normal; }
   .footer-contact a{ font-size:15px; }
 
-  /* --- 30c. bizee scale confirmations ------------------------- */
+  /* --- 30c. BUG: hero signup field collapsed to 20px ---------- */
+  /* The desktop rule gives this input flex:1 for the side-by-side
+     pill. Section 26's mobile block flips the form to
+     flex-direction:column, which makes flex-basis:0 govern the
+     MAIN axis — now the height — so it silently beat height:46px
+     and the field rendered ~20px tall on every phone. Resetting
+     flex is the fix; the explicit height then applies. */
+  .hero-signup__form input{ flex:none; height:52px; }
+  .hero-signup__form .btn{ flex:none; height:52px; }
+
+  /* --- 30d. bizee scale confirmations ------------------------- */
   /* Section headings and their intros centre; cards and lists stay
      left. Buttons are already full-width 52px from section 19. */
   .site-footer .tagline,
