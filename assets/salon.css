@@ -1556,3 +1556,28 @@ body.modal-open{ overflow:hidden; }
     gap:8px; padding-top:22px;
   }
 }
+
+/* ============================================================
+   40. STICKY BAR ICONS — all circular on mobile.
+   §29 raised every control to a 44px tap target, but the earlier
+   `.nav-actions .icon-btn--wa{ width:38px }` (§26) outranks it on
+   specificity, so WhatsApp rendered 38×44 — an oval sitting next
+   to two circles. Equalising all three here, at a specificity that
+   beats both earlier rules, so the cluster reads as one set.
+   ============================================================ */
+@media (max-width:820px){
+  .site-header .nav-actions .icon-btn,
+  .site-header .nav-actions .icon-btn--wa,
+  .site-header .nav-actions .icon-btn--icononly{
+    width:44px; height:44px;
+    min-width:44px; flex:none;
+    padding:0; gap:0;
+    border-radius:999px;
+    justify-content:center;
+  }
+  .site-header .nav-actions .icon-btn span{ display:none; }
+  .site-header .nav-actions .icon-btn svg{ width:19px; height:19px; }
+  .site-header .nav-toggle{
+    width:44px; height:44px; border-radius:999px; flex:none;
+  }
+}
