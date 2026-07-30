@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>og</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  /* Build-only template. Rendered to og-image.jpg at 1200x630, then this
+     file is deleted. WhatsApp centre-crops and rounds corners, so the
+     whole composition sits inside the middle 80% and nothing structural
+     touches an edge. */
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:1200px; height:630px; }
+  body{
+    background:#1A1613;
+    display:flex; align-items:center; justify-content:center;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* the safe zone: 120px side margins, 63px top/bottom = centre 80% */
+  .card{
+    width:960px; height:504px;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center;
+  }
+
+  .wordmark{ margin-bottom:44px; }
+  .wordmark .top{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-variation-settings:'SOFT' 30, 'WONK' 1, 'opsz' 72;
+    text-transform:uppercase;
+    color:#FAF6EE;
+    font-size:30px; letter-spacing:.004em; line-height:.94;
+    display:block;
+  }
+  .wordmark .rule-mark{ height:2px; background:#6E2733; margin:6px 0 7px; width:100%; }
+  .wordmark .bottom{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500; font-size:14px; letter-spacing:.40em;
+    text-transform:uppercase; color:#FAF6EE; display:block;
+  }
+
+  .slogan{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500; font-size:19px; letter-spacing:.20em;
+    text-transform:uppercase; color:#C98494;
+    margin-bottom:30px;
+  }
+
+  /* the loudest line, biggest — this is what survives a small preview */
+  .h1{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-variation-settings:'SOFT' 20, 'WONK' 0, 'opsz' 60;
+    font-size:96px; line-height:1.02; letter-spacing:-.012em;
+    color:#FAF6EE;
+  }
+  .h2{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-variation-settings:'SOFT' 20, 'WONK' 0, 'opsz' 60;
+    font-size:44px; line-height:1.1; letter-spacing:-.006em;
+    /* cream at reduced opacity, not a pink tint — the handbook allows
+       seven values and no second signal colour, so hierarchy here comes
+       from size and opacity rather than a new hue. */
+    color:rgba(250,246,238,.80);
+    margin-top:16px;
+  }
+
+  /* the table edge */
+  .rule{ width:72px; height:3px; background:#6E2733; margin:38px 0 34px; }
+
+  .facts{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500; font-size:18px; letter-spacing:.16em;
+    text-transform:uppercase; color:rgba(250,246,238,.72);
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="wordmark">
+      <span class="top">The&nbsp;Salon</span>
+      <span class="rule-mark"></span>
+      <span class="bottom">Berlin</span>
+    </div>
+
+    <div class="slogan">Inspiration through conversations</div>
+
+    <div class="h1">Debate &amp; Connect.</div>
+    <div class="h2">Become Part of Our Community.</div>
+
+    <div class="rule"></div>
+
+    <div class="facts">Monthly in Berlin · Free entry · 25 seats</div>
+  </div>
+</body>
+</html>
