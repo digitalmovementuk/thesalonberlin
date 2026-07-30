@@ -1395,3 +1395,164 @@ body.moderation .site-header.is-solid{ background:var(--cream-deep); }
 html{ scroll-padding-top:96px; scroll-behavior:smooth; }
 [id]{ scroll-margin-top:96px; }
 @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+
+/* ============================================================
+   37. Hero signup — align to the CTA above.
+   The block was centred in its own narrowed 760px wrap, so it sat
+   inboard of the "Request a seat" button above it and read as a
+   separate, unrelated strip. Restoring the standard .wrap gives it
+   the identical left edge to the eyebrow, H1 and CTA.
+   Desktop only — the mobile stack below 820px stays centred.
+   ============================================================ */
+@media (min-width:821px){
+  .hero-signup{ text-align:left; }
+  .hero-signup .wrap{ max-width:var(--container); }
+  .hero-signup__form{ margin:0; }
+}
+
+/* ============================================================
+   38. Thank-you dialog — shown once an enquiry has actually been
+   delivered. Wine stays an accent here: a 3px table-edge rule at
+   the panel top, the mark, the hairline and the button. The panel
+   itself is cream, never wine.
+   ============================================================ */
+.modal{
+  position:fixed; inset:0; z-index:200;
+  display:grid; place-items:center;
+  padding:24px;
+}
+.modal[hidden]{ display:none; }
+.modal__scrim{
+  position:absolute; inset:0;
+  background:rgba(26,22,19,.74);
+  backdrop-filter:blur(7px) saturate(.9);
+  -webkit-backdrop-filter:blur(7px) saturate(.9);
+  animation:modalScrimIn .3s ease both;
+}
+.modal__panel{
+  position:relative; z-index:1;
+  width:min(520px,100%);
+  max-height:calc(100vh - 48px); overflow-y:auto;
+  background:var(--cream-light);
+  border:1px solid var(--hair);
+  padding:46px 46px 38px;
+  box-shadow:0 32px 84px rgba(26,22,19,.36);
+  text-align:left;
+  animation:modalPanelIn .34s cubic-bezier(.2,.72,.28,1) both;
+}
+.modal__panel::before{            /* the table edge */
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--wine);
+}
+.modal__mark{
+  width:46px; height:46px; border-radius:999px;
+  border:1.5px solid var(--wine);
+  display:grid; place-items:center;
+  margin-bottom:22px;
+}
+.modal__mark svg{ width:22px; height:22px; fill:none; stroke:var(--wine); stroke-width:2.2; }
+.modal__eyebrow{
+  display:block; font-family:var(--mono); font-weight:500;
+  font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--wine); margin-bottom:12px;
+}
+.modal__title{
+  font-family:var(--display); font-weight:600;
+  font-variation-settings:var(--wonk-off);
+  font-size:30px; line-height:1.14; color:var(--ink); margin:0;
+}
+.modal__body{
+  font-family:var(--sans); font-size:16px; line-height:1.62;
+  color:var(--ash); margin:16px 0 0;
+}
+.modal__rule{ border:0; border-top:1px solid var(--hair); margin:26px 0 18px; }
+.modal__meta{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ash); margin:0 0 24px;
+}
+.modal__actions{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.modal__close{
+  position:absolute; top:14px; right:14px;
+  width:38px; height:38px; border:0; background:transparent;
+  cursor:pointer; border-radius:999px; color:var(--ash);
+  display:grid; place-items:center;
+}
+.modal__close:hover{ background:var(--cream-deep); color:var(--ink); }
+.modal__close svg{ width:16px; height:16px; stroke:currentColor; stroke-width:2.2; fill:none; }
+.modal a{ color:var(--wine); }
+body.modal-open{ overflow:hidden; }
+
+/* the sending / error states on the submitting button */
+.is-sending{ opacity:.72; pointer-events:none; }
+.form-error{
+  font-family:var(--sans); font-size:14.5px; line-height:1.55;
+  color:var(--wine); margin-top:14px;
+}
+
+@keyframes modalScrimIn{ from{ opacity:0 } to{ opacity:1 } }
+@keyframes modalPanelIn{
+  from{ opacity:0; transform:translateY(16px) scale(.985) }
+  to{ opacity:1; transform:none }
+}
+@media (prefers-reduced-motion:reduce){
+  .modal__scrim,.modal__panel{ animation:none; }
+}
+
+@media (max-width:820px){
+  .modal{ padding:16px; }
+  .modal__panel{ padding:34px 24px 28px; }
+  .modal__title{ font-size:25px; }
+  .modal__body{ font-size:15.5px; }
+  .modal__mark{ width:42px; height:42px; margin-bottom:18px; }
+  .modal__actions{ flex-direction:column; align-items:stretch; gap:12px; }
+  .modal__actions .btn{ width:100%; }
+}
+
+/* ============================================================
+   39. MOBILE FOOTER — one authoritative block.
+   Five earlier patches (§19, §29, §30, §30b, §30d) each fixed one
+   symptom and left the footer half-centred: the wordmark sat hard
+   left while the slogan and legal line under it were centred, so
+   the identity block read as broken rather than composed.
+
+   Settled rule, per the bizee mobile scale: the identity block
+   (wordmark + slogan) is the masthead and CENTRES; the link groups
+   are lists and stay LEFT; the legal colophon centres. A hairline
+   under the masthead makes that centre→left change read as
+   deliberate.
+
+   Mobile block stays last in the stylesheet.
+   ============================================================ */
+@media (max-width:820px){
+
+  /* --- masthead: wordmark + slogan, centred as one unit --- */
+  .site-footer > .wrap > .top > div:first-child{
+    text-align:center;
+    padding-bottom:28px;
+    border-bottom:1px solid rgba(250,246,238,.16);
+  }
+  .site-footer .wordmark{ display:inline-block; }
+  .site-footer .wordmark .top{ font-size:22px; line-height:.98; }
+  .site-footer .wordmark .rule-mark{ margin:7px 0 8px; }
+  /* BERLIN is tracked at .40em, which leaves a trailing space after
+     the final N. Centred, that shifts the word visibly left of the
+     rule above it — text-indent puts the half-space back on. */
+  .site-footer .wordmark .bottom{
+    font-size:12.5px; letter-spacing:.36em; text-indent:.36em;
+  }
+  .site-footer .tagline{
+    max-width:26ch; margin:16px auto 0;
+    font-size:16px; line-height:1.5; text-align:center;
+  }
+
+  /* --- link groups: lists, so they stay left --- */
+  .site-footer > .wrap > .top > div + div{ text-align:left; }
+  .site-footer h4{ margin-bottom:8px; }
+  .site-footer .footer-contact a{ justify-content:flex-start; }
+
+  /* --- colophon --- */
+  .site-footer .legal{
+    text-align:center; justify-content:center; align-items:center;
+    gap:8px; padding-top:22px;
+  }
+}

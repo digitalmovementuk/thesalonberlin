@@ -102,10 +102,19 @@
         <p class="lead mt-s">Leave your email and we'll tell you when the next date is set: the
           guest, the topic, the date and the venue. That's one message a month at most, nothing
           else, and unsubscribing takes one click.</p>
-        <form class="mt-m" style="max-width:430px" action="#" method="post">
+        <form class="mt-m" style="max-width:430px" action="https://formsubmit.co/fabianpianka@hotmail.com" method="POST"
+              data-salon-form
+              data-thanks-eyebrow="You're on the list"
+              data-thanks-title="We'll tell you first."
+              data-thanks-body="As soon as the date, the guest and the venue for №1 are fixed, that email lands with you — before the date goes public."
+              data-thanks-meta="One email a month at most">
+          <input type="hidden" name="_subject" value="Salon Berlin — date signup (evenings)">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
           <div class="field">
             <label for="subscribe-email">Email</label>
-            <input id="subscribe-email" name="email" type="email" autocomplete="email">
+            <input id="subscribe-email" name="email" type="email" autocomplete="email" required>
           </div>
           <div class="btn-row mt-s">
             <button class="btn" type="submit">Send me the date</button>
@@ -262,6 +271,8 @@
   f(); window.addEventListener('scroll',f,{passive:true});
 })();
 </script>
+
+<script src="assets/forms.js" defer></script>
 
 </body>
 </html>

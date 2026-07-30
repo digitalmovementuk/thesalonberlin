@@ -81,8 +81,17 @@
     <div class="hero-signup" id="signup">
       <div class="wrap">
         <span class="hero-signup__label">Hear when the first one is set</span>
-        <form class="hero-signup__form" onsubmit="return false">
-          <input type="email" placeholder="your@email.com" aria-label="Email address">
+        <form class="hero-signup__form" action="https://formsubmit.co/fabianpianka@hotmail.com" method="POST"
+              data-salon-form
+              data-thanks-eyebrow="You're on the list"
+              data-thanks-title="We'll tell you first."
+              data-thanks-body="As soon as the date, the guest and the venue for №1 are fixed, that email lands with you — before the date goes public."
+              data-thanks-meta="One email a month at most">
+          <input type="hidden" name="_subject" value="Salon Berlin — date signup (hero)">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
+          <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
           <button class="btn" type="submit">Send me the date</button>
         </form>
         <p class="hero-signup__note">Double opt-in · one email a month · unsubscribe anytime</p>
@@ -380,6 +389,8 @@
   f(); window.addEventListener('scroll',f,{passive:true});
 })();
 </script>
+
+<script src="assets/forms.js" defer></script>
 
 </body>
 </html>

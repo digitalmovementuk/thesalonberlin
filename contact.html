@@ -69,16 +69,26 @@
       </div>
 
       <div>
-        <form action="#" method="post" style="max-width:620px">
+        <form action="https://formsubmit.co/fabianpianka@hotmail.com" method="POST" style="max-width:620px"
+              data-salon-form
+              data-thanks-eyebrow="Seat requested"
+              data-thanks-title="Your seat is noted."
+              data-thanks-body="Fabian reads every request himself and will write back within a day or two — and again the moment the date, the guest and the venue for №1 are fixed."
+              data-thanks-meta="Free entry · 25 seats · Berlin">
+
+          <input type="hidden" name="_subject" value="Salon Berlin — seat request">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
 
           <div class="grid grid--2">
             <div class="field">
               <label for="seat-name">Name</label>
-              <input id="seat-name" name="name" type="text" autocomplete="name">
+              <input id="seat-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
               <label for="seat-email">Email</label>
-              <input id="seat-email" name="email" type="email" autocomplete="email">
+              <input id="seat-email" name="email" type="email" autocomplete="email" required>
             </div>
           </div>
 
@@ -97,7 +107,7 @@
 
           <div class="btn-row mt-m">
             <label class="consent">
-            <input type="checkbox" required>
+            <input type="checkbox" name="consent" value="Yes — agreed to the Datenschutzerklärung" required>
             <span>I agree that my details may be used to answer this request, as described in the
               <a href="datenschutz.html">Datenschutzerklärung</a>.</span>
           </label>
@@ -332,6 +342,8 @@
   f(); window.addEventListener('scroll',f,{passive:true});
 })();
 </script>
+
+<script src="assets/forms.js" defer></script>
 
 </body>
 </html>
